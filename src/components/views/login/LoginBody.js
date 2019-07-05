@@ -1,6 +1,8 @@
 // modules
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { signIn } from "../../../store/actions/authActions";
 
 // styles
 import { white, orange_gradient } from "../../~reusables/variables/colors";
@@ -14,18 +16,45 @@ import { Input } from "../../~reusables/atoms/Inputs";
 import { ButtonSecondary } from "../../~reusables/atoms/Buttons";
 import { tablet_max_width } from "../../~reusables/variables/media-queries";
 
-const LoginBody = () => {
+const LoginBody = props => {
+  const { signIn, authError } = props;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onEmailChange = e => {
+    setEmail(e.target.value);
+  };
+
+  const onPasswordChange = e => {
+    setPassword(e.target.value);
+  };
+
+  const onFormSubmit = e => {
+    e.preventDefault();
+    signIn({ email, password });
+  };
+
   return (
     <StyledBody>
       <section className="hero-container">
         <div className="hero">
           <div className="hero-text">
             <h2>Log in to your account</h2>
-            <form>
-              <Input placeholder="Your email" />
-              <Input placeholder="Your password" />
+            <form onSubmit={onFormSubmit}>
+              <Input
+                placeholder="Your email"
+                value={email}
+                onChange={onEmailChange}
+              />
+              <Input
+                type="password"
+                placeholder="Your password"
+                value={password}
+                onChange={onPasswordChange}
+              />
               <ButtonSecondary>Log In</ButtonSecondary>
             </form>
+            {authError ? <p className="error">{authError}</p> : null}
           </div>
         </div>
       </section>
@@ -36,6 +65,11 @@ const LoginBody = () => {
 const StyledBody = styled.main`
   background: ${white};
   min-height: 400px;
+
+  .error {
+    color: #bb0000;
+    text-align: center;
+  }
 
   h2 {
     color: ${white};
@@ -89,4 +123,19 @@ const StyledBody = styled.main`
   }
 `;
 
-export default LoginBody;
+const mapStateToProps = state => {
+  return {
+    authError: state.auth.authError
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    signIn: creds => dispatch(signIn(creds))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginBody);

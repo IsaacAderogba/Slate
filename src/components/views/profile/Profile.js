@@ -12,6 +12,7 @@ const Profile = (props) => {
 const mapStateToProps = state => {
   return {
       users: state.firestore.ordered.users
+      
   };
 };
 
