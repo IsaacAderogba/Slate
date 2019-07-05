@@ -1,0 +1,1 @@
+export const red = "linear-gradient(180deg, #FF7FB7 -29.41%, rgba(255, 127, 127, 0.5) 131.37%)";
