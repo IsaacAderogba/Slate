@@ -7,4 +7,4 @@ export const grey_gradient = "linear-gradient(180deg, #E2E2E2 -29.41%, rgba(255,
 export const text = "#4a5568";
 export const black = "#1d1d26";
 export const white = "#ffffff";
-export const alt_background = "f8f8ff";
+export const alt_background = "#f8f8ff";

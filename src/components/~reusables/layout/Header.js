@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 // styles
 import logo from "../assets/logo.png";
-import { small_space, extra_small_space } from "../variables/spacing";
+import { small_space, extra_small_space, medium_space_1 } from "../variables/spacing";
 import { body_hero } from "../variables/font-sizes";
 import { white, text, black } from "../variables/colors";
 
@@ -38,10 +38,10 @@ const StyledHeader = styled.header`
 
   nav {
     height: inherit;
-    max-width: 1280px;
+    max-width: 1140px;
     margin: 0 auto;
     display: flex;
-    padding: 0 ${small_space};
+    padding: 0 ${medium_space_1};
     justify-content: space-between;
     align-items: center;
   }
