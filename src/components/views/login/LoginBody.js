@@ -20,7 +20,7 @@ const LoginBody = () => {
       <section className="hero-container">
         <div className="hero">
           <div className="hero-text">
-            <h2>Lorem ipsum dolor sit</h2>
+            <h2>Log in to your account</h2>
             <form>
               <Input placeholder="Your email" />
               <Input placeholder="Your password" />
