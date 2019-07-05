@@ -1,1 +1,10 @@
-export const red = "linear-gradient(180deg, #FF7FB7 -29.41%, rgba(255, 127, 127, 0.5) 131.37%)";
+export const red_gradient = "linear-gradient(180deg, #FF7FB7 -29.41%, rgba(255, 127, 127, 0.5) 131.37%)";
+export const green_gradient = "linear-gradient(180deg, #50A7C2 -29.41%, rgba(183, 248, 216, 0.5) 131.37%)";
+export const blue_gradient = "linear-gradient(180deg, #66A6FF -29.41%, rgba(137, 247, 254, 0.5) 131.37%)";
+export const purple_gradient = "linear-gradient(180deg, #B19FFF -29.41%, rgba(236, 161, 254, 0.5) 131.37%)";
+export const orange_gradient = "linear-gradient(180deg, #FF7F7F -29.41%, rgba(255, 209, 127, 0.5) 131.37%)";
+export const grey_gradient = "linear-gradient(180deg, #E2E2E2 -29.41%, rgba(255, 255, 255, 0.5) 131.37%)";
+export const text = "#4a5568";
+export const black = "#1d1d26";
+export const white = "#ffffff";
+export const alt_background = "f8f8ff";
