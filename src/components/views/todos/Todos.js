@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Tasks = () => {
+const Todos = () => {
     return (
         <div>
-            Tasks
+            Todos
         </div>
     )
 }
 
-export default Tasks;
+export default Todos;
