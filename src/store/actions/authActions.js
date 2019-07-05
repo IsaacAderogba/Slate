@@ -10,7 +10,7 @@ export const SIGN_UP = "SIGN_UP";
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
 export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE";
 
-export const ONBOARDING_STARTED = "ONBOARDING_STARTED"
+export const ONBOARDING_STARTED = "ONBOARDING_STARTED";
 
 export const signIn = credentials => {
   return (dispatch, getState, { getFirebase }) => {
@@ -61,10 +61,11 @@ export const signUp = newUser => {
           .doc(res.user.uid)
           .set({
             email: newUser.email,
-            isDark: false,
-            firstName: "Your first name",
-            lastName: "Your last name",
-            image: ''
+            name: "",
+            theme: "linear-gradient(180deg, #FF7F7F -29.41%, rgba(255, 209, 127, 0.5) 131.37%)",
+            openTasks: [],
+            closedTasks: [],
+            newDay: true
           });
       })
       .then(() => {
@@ -77,7 +78,7 @@ export const signUp = newUser => {
 };
 
 export const onboardingStarted = () => {
-  return (dispatch) => {
-    dispatch({ type: ONBOARDING_STARTED, payload: false})
-  }
-}
+  return dispatch => {
+    dispatch({ type: ONBOARDING_STARTED, payload: false });
+  };
+};

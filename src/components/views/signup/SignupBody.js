@@ -1,6 +1,10 @@
 // modules
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+
+// components
+import { signUp } from "../../../store/actions/authActions";
 
 // styles
 import { white, orange_gradient } from "../../~reusables/variables/colors";
@@ -12,13 +16,32 @@ import heroImage from "../../~reusables/assets/hero-image.png";
 import {
   heading_1,
   button_text,
-  heading_2
+  heading_2,
+  body_1
 } from "../../~reusables/variables/font-sizes";
 import { Input } from "../../~reusables/atoms/Inputs";
 import { ButtonSecondary } from "../../~reusables/atoms/Buttons";
 import { tablet_max_width } from "../../~reusables/variables/media-queries";
+import ComponentLoader from "../../~reusables/molecules/ComponentLoader";
 
-const SignupBody = () => {
+const SignupBody = props => {
+  const { signUp, signupError, signupLoader, signupSuccess } = props;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onEmailChange = e => {
+    setEmail(e.target.value);
+  };
+
+  const onPasswordChange = e => {
+    setPassword(e.target.value);
+  };
+
+  const onFormSubmit = e => {
+    e.preventDefault();
+    signUp({ email, password });
+  };
+
   return (
     <StyledBody>
       <section className="hero-container">
@@ -29,11 +52,24 @@ const SignupBody = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididun
             </p>
-            <form>
-              <Input placeholder="Your email" />
-              <Input placeholder="Your password" />
+            <form onSubmit={onFormSubmit}>
+              <Input
+                placeholder="Your email"
+                value={email}
+                onChange={onEmailChange}
+              />
+              <Input
+                placeholder="Your password"
+                value={password}
+                onChange={onPasswordChange}
+                type="password"
+              />
               <ButtonSecondary>Sign Up</ButtonSecondary>
             </form>
+            {signupLoader ? (
+              <ComponentLoader height="50px" />
+            ) : null}
+            {signupError ? <p className="error">{signupError}</p> : null}
           </div>
           <div className="hero-image">
             <img src={heroImage} alt="screenshot of app" />
@@ -47,6 +83,12 @@ const SignupBody = () => {
 const StyledBody = styled.main`
   background: ${white};
   min-height: 400px;
+
+  .error {
+    color: #bb0000;
+    text-align: center;
+    font-size: ${body_1};
+  }
 
   h1,
   p {
@@ -133,4 +175,21 @@ const StyledBody = styled.main`
   }
 `;
 
-export default SignupBody;
+const mapStateToProps = state => {
+  return {
+    signupError: state.auth.signupError,
+    signupSuccess: state.auth.signupSuccess,
+    signupLoader: state.auth.signupLoader
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    signUp: newUser => dispatch(signUp(newUser))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignupBody);
