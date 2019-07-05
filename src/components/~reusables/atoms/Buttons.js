@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 import { extra_small_space } from '../variables/spacing';
 import { orange_gradient, white, text } from '../variables/colors';
-import { button_text, body_1 } from '../variables/font-sizes'
+import { button_text } from '../variables/font-sizes'
 
 export const Button = styled.button`
   font-size: ${button_text};

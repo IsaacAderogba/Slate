@@ -4,10 +4,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 // styles
-import logo from "../assets/logo.png";
-import { small_space, extra_small_space, medium_space_1 } from "../variables/spacing";
-import { body_hero, body_2 } from "../variables/font-sizes";
-import { white, text, black } from "../variables/colors";
+import { medium_space_1 } from "../variables/spacing";
+import { body_2 } from "../variables/font-sizes";
+import { white, text } from "../variables/colors";
 
 const Footer = () => {
   return (

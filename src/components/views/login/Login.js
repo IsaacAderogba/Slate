@@ -1,9 +1,17 @@
+// modules
 import React from 'react';
+
+// components
+import Header from '../../~reusables/layout/Header';
+import Footer from '../../~reusables/layout/Footer';
+import LoginBody from './LoginBody';
 
 const Login = () => {
     return (
         <div>
-            Login
+            <Header />
+            <LoginBody />
+            <Footer />
         </div>
     )
 }

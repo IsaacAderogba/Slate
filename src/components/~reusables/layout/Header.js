@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 // styles
 import logo from "../assets/logo.png";
-import { small_space, extra_small_space, medium_space_1 } from "../variables/spacing";
+import { extra_small_space, medium_space_1 } from "../variables/spacing";
 import { body_hero } from "../variables/font-sizes";
 import { white, text, black } from "../variables/colors";
 
