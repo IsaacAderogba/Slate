@@ -83,7 +83,7 @@ const StyledBody = styled.main`
       justify-content: center;
       align-items: center;
       background: ${orange_gradient};
-      min-height: 70vh;
+      min-height: 80vh;
       min-height: 350px;
       border-radius: 8px;
     }
@@ -96,12 +96,12 @@ const StyledBody = styled.main`
     .hero-image {
       width: 30%;
       margin: 0 5%;
-      height: 70vh;
+      height: 80vh;
       display: flex;
       justify-content: center;
 
       img {
-        height: 80vh;
+        height: 90vh;
       }
     }
 
@@ -112,6 +112,10 @@ const StyledBody = styled.main`
       .hero-image {
         width: 90%;
         margin-top: ${medium_space_1};
+
+        img {
+        height: 80vh;
+      }
       }
 
       h1 {

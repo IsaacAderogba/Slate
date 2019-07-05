@@ -29,8 +29,6 @@ const Header = () => {
   );
 };
 
-export default Header;
-
 const StyledHeader = styled.header`
   background-color: ${white};
   height: 10vh;
@@ -78,3 +76,5 @@ const StyledHeader = styled.header`
     color: ${black};
   }
 `;
+
+export default Header;
