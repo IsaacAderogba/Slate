@@ -10,15 +10,17 @@ export const Input = styled.input`
   box-shadow: 0 0.8rem 2.5rem 0 rgba(40, 51, 63, 0.05);
   transition: all 100ms ease-in-out;
   height: 36px;
-  width: 100%;
+  width: 95%;
   max-width: 324px;
-  background-color: transparent;
+  background-color: ${props => (props.hover ? white : 'transparent')};
   border: 1px solid ${white};
-  border-radius: 4px;
   padding-left: ${small_space};
   margin-bottom: ${props => (props.margin ? props.margin : medium_space_1)};
   color: ${text};
   font-weight: 500;
+  border-radius: 4px;
+  box-shadow: ${props => (props.hover ? '0px 2px 6px rgba(0, 0, 0, 0.11);' : '0 0 0 0')}; 
+
 
   &:focus {
     border-color: ${alt_background};
@@ -26,16 +28,16 @@ export const Input = styled.input`
   }
 
   ::placeholder {
-    color: ${alt_background};
+    color: ${props => (props.hover ? text : alt_background)};
     opacity: 1;
   }
 
   :-ms-input-placeholder {
-    color: ${alt_background};
+    color: ${props => (props.hover ? text : alt_background)};
   }
 
   ::-ms-input-placeholder {
-    color: ${alt_background};
+    color: ${props => (props.hover ? text : alt_background)};
   }
 
   @media only screen and (max-width: ${tablet_max_width}) {

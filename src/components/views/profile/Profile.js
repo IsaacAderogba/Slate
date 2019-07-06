@@ -11,6 +11,8 @@ import { grey_gradient } from "../../~reusables/variables/colors";
 import ComponentLoader from "../../~reusables/molecules/ComponentLoader";
 import DesktopNav from "../../~reusables/layout/DesktopNav";
 import FooterNav from "../../~reusables/layout/FooterNav";
+import ProfileBody from "./ProfileBody";
+import { small_space } from "../../~reusables/variables/spacing";
 
 const Profile = props => {
   const { user } = props;
@@ -21,6 +23,9 @@ const Profile = props => {
     return (
       <StyledProfile themeColor={themeColor}>
         <DesktopNav />
+        <div className="body">
+          <ProfileBody user={user} />
+        </div>
         <FooterNav />
       </StyledProfile>
     );
@@ -30,10 +35,14 @@ const Profile = props => {
 };
 
 const StyledProfile = styled.div`
-  height: 100vh;
+  height: 25vh;
   background: ${props => (props.themeColor ? props.themeColor : grey_gradient)};
 
-  @media only screen and (max-width: 499px) {
+  .body {
+    padding: ${small_space};
+  }
+
+  @media only screen and (max-width: 500px) {
     margin-bottom: 60px;
   }
 `;

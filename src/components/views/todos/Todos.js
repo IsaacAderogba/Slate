@@ -33,7 +33,7 @@ const StyledTodos = styled.div`
   height: 100vh;
   background: ${props => (props.themeColor ? props.themeColor : grey_gradient)};
 
-  @media only screen and (max-width: 499px) {
+  @media only screen and (max-width: 500px) {
     margin-bottom: 60px;
   }
 `;

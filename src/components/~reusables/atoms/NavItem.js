@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 // components
 
 // styles
-import { black, text } from "../variables/colors";
+import { text } from "../variables/colors";
 import { extra_small_space } from "../variables/spacing";
 
 const DesktopNavItem = ({ link, text, icon }) => {
