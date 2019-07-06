@@ -25,9 +25,15 @@ const Onboarding = props => {
     themeColor = user[0].theme;
     return (
       <StyledOnboarding themeColor={themeColor}>
-      {start && <Start />}
-      {color && <Color />}
-      {emotion && <Emotion />}
+        {start && (
+          <Start
+            setNextModal={setColor}
+            setCurrentModal={setStart}
+            user={user}
+          />
+        )}
+        {color && <Color user={user} />}
+        {emotion && <Emotion user={user} />}
       </StyledOnboarding>
     );
   } else {

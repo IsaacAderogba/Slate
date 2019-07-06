@@ -1,20 +1,38 @@
 // modules
 import React, { useState } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { onboardingStarted } from "../../../store/actions/authActions";
+import { updateProfile } from "../../../store/actions/userActions";
+
+// components
+
+// styles
 import { ButtonSecondary } from "../../~reusables/atoms/Buttons";
 import { Input } from "../../~reusables/atoms/Inputs";
 import { white } from "../../~reusables/variables/colors";
 
-const Start = ({ setNextModal, onboardingStarted }) => {
+const Start = ({
+  setNextModal,
+  setCurrentModal,
+  onboardingStarted,
+  user,
+  updateProfile
+}) => {
   const [name, setName] = useState("");
+  console.log(user);
 
   const onFormSubmit = e => {
     e.preventDefault();
+    updateProfile({
+      name: name,
+      theme: user[0].theme,
+      id: user[0].id
+    });
 
-    // create updateProfile method
-
+    onboardingStarted();
+    setCurrentModal(false);
     setNextModal(true);
-    //   onboardingStarted();
   };
 
   return (
@@ -48,4 +66,14 @@ const StyledStart = styled.div`
   }
 `;
 
-export default Start;
+const mapDispatchToProps = dispatch => {
+  return {
+    onboardingStarted: () => dispatch(onboardingStarted()),
+    updateProfile: profile => dispatch(updateProfile(profile))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Start);
