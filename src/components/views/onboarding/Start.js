@@ -20,7 +20,6 @@ const Start = ({
   updateProfile
 }) => {
   const [name, setName] = useState("");
-  console.log(user);
 
   const onFormSubmit = e => {
     e.preventDefault();

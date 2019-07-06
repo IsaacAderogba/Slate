@@ -1,12 +1,13 @@
+import uuid from "uuid";
 export const GENERATE_TODOS = "GENERATE_TODOS";
+export const TOGGLE_TODO = "TOGGLE_TODO";
 
-export const generateTodos = user => {
+export const generateTodos = (user, emoji) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
-    console.log(user);
 
     firestore
-      .collection(user[0].emoji)
+      .collection(emoji)
       .get()
       .then(snapshot => {
         let todosArray = snapshot.docs.map(doc => doc.data());
@@ -22,17 +23,64 @@ export const generateTodos = user => {
           todosArray[randomIndex] = tempValue;
         }
 
+        let arrayOfObjects = todosArray.slice(0, 3).map(todo => {
+          return {
+            id: uuid(),
+            todo: todo.todo,
+            completed: false
+          };
+        });
+
         firestore
           .collection("users")
           .doc(user[0].id)
           .update({
-            openTasks: [...user[0].openTasks, ...todosArray.slice(0, 3)]
+            openTasks: [...user[0].openTasks, ...arrayOfObjects]
           });
 
         dispatch({ type: GENERATE_TODOS });
       })
       .catch(err => {
         console.log(err);
+      });
+  };
+};
+
+export const toggleTodo = (user, todo) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+    let openTodos = user[0].openTasks.map(t => {
+      if (t.id === todo.id) {
+        t.completed = !t.completed;
+        return t;
+      }
+      return t;
+    });
+    let closedTodos = user[0].closedTasks.map(t => {
+      if (t.id === todo.id) {
+        t.completed = !t.completed;
+        return t;
+      }
+      return t;
+    });
+    let todos = [...openTodos, ...closedTodos];
+
+    let closedTasks = [];
+    let openTasks = todos.filter(t => {
+      if (t.completed === false) {
+        return true;
+      } else {
+        closedTasks.push(t);
+        return false;
+      }
+    });
+
+    firestore
+      .collection("users")
+      .doc(user[0].id)
+      .update({
+        openTasks: openTasks,
+        closedTasks: closedTasks
       });
   };
 };

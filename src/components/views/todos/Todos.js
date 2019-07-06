@@ -11,6 +11,8 @@ import { grey_gradient } from "../../~reusables/variables/colors";
 import ComponentLoader from "../../~reusables/molecules/ComponentLoader";
 import DesktopNav from "../../~reusables/layout/DesktopNav";
 import FooterNav from "../../~reusables/layout/FooterNav";
+import { small_space } from "../../~reusables/variables/spacing";
+import TodosBody from "./TodosBody";
 
 const Todos = props => {
   const { user } = props;
@@ -21,7 +23,10 @@ const Todos = props => {
     return (
       <StyledTodos themeColor={themeColor}>
         <DesktopNav />
-        <FooterNav />
+        <div className="body">
+          <TodosBody user={user} />
+        </div>
+          <FooterNav />
       </StyledTodos>
     );
   } else {
@@ -30,8 +35,12 @@ const Todos = props => {
 };
 
 const StyledTodos = styled.div`
-  height: 100vh;
+  height: 25vh;
   background: ${props => (props.themeColor ? props.themeColor : grey_gradient)};
+
+  .body {
+    padding: ${small_space};
+  }
 
   @media only screen and (max-width: 500px) {
     margin-bottom: 60px;

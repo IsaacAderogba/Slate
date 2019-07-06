@@ -16,6 +16,7 @@ import { small_space } from "../../~reusables/variables/spacing";
 
 const Profile = props => {
   const { user } = props;
+  console.log(user);
 
   let themeColor = null;
   if (user && user.length > 0) {

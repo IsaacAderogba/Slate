@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { signOut } from "../../../store/actions/authActions";
-import { generateTodos } from "../../../store/actions/todosActions";
-
 
 // components
 import { updateProfile } from "../../../store/actions/userActions";
@@ -25,7 +23,7 @@ import {
   purple_gradient
 } from "../../~reusables/variables/colors";
 
-const ProfileBody = ({ user, updateProfile, signOut, generateTodos }) => {
+const ProfileBody = ({ user, updateProfile, signOut }) => {
   const [name, setName] = useState(user[0].name);
   const onSetTheme = themeSelected => {
     updateProfile({
@@ -35,8 +33,6 @@ const ProfileBody = ({ user, updateProfile, signOut, generateTodos }) => {
       emoji: user[0].emoji
     });
   };
-
-  console.log(user);
 
   const onSaveOptions = e => {
     e.preventDefault();
@@ -84,8 +80,6 @@ const ProfileBody = ({ user, updateProfile, signOut, generateTodos }) => {
         <ButtonPrimary color={user[0].theme}>Save Options</ButtonPrimary>
       </form>
       <ButtonSecondary onClick={() => signOut()}>Log out</ButtonSecondary>
-      <ButtonSecondary onClick={() => generateTodos(user)}>Generate Todos</ButtonSecondary>
-
     </StyledBody>
   );
 };
@@ -153,7 +147,6 @@ const StyledBody = styled.main`
 const mapDispatchToProps = dispatch => {
   return {
     updateProfile: profile => dispatch(updateProfile(profile)),
-    generateTodos: (user) => dispatch(generateTodos(user)),
     signOut: () => dispatch(signOut())
   };
 };

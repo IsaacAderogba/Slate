@@ -3,11 +3,6 @@ import React from "react";
 import styled from "styled-components";
 
 // styles
-import { tablet_max_width } from "../variables/media-queries";
-import { body_hero } from "../variables/font-sizes";
-import logo from "../assets/logo.png";
-import { extra_small_space } from "../variables/spacing";
-import { text } from "../variables/colors";
 import DesktopNavItem from "../atoms/NavItem";
 
 const FooterNav = () => {

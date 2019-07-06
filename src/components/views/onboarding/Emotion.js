@@ -3,11 +3,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { onboardingStarted } from "../../../store/actions/authActions";
-import { updateProfile } from "../../../store/actions/userActions";
 import { withRouter } from "react-router-dom";
 
-// components
+// components/methods
+import { onboardingStarted } from "../../../store/actions/authActions";
+import { updateProfile } from "../../../store/actions/userActions";
+import { generateTodos } from "../../../store/actions/todosActions";
 
 // styles
 import { ButtonSecondary } from "../../~reusables/atoms/Buttons";
@@ -17,7 +18,13 @@ import {
   small_space
 } from "../../~reusables/variables/spacing";
 
-const Emotion = ({ setCurrentModal, user, updateProfile, history }) => {
+const Emotion = ({
+  setCurrentModal,
+  user,
+  updateProfile,
+  history,
+  generateTodos
+}) => {
   const [emoji, setEmoji] = useState("happy");
 
   const onFormSubmit = e => {
@@ -28,32 +35,52 @@ const Emotion = ({ setCurrentModal, user, updateProfile, history }) => {
       id: user[0].id,
       emoji: emoji
     });
-    // call gen todos function.
+    generateTodos(user, emoji);
     setCurrentModal(false);
     history.push("/todos");
   };
 
   return (
     <StyledEmotion>
-      <h2>Lastly, {user[0].name} How are you feeling? <span role="img" aria-label="okay">👌</span></h2>
+      <h2>
+        Lastly, {user[0].name} How are you feeling?{" "}
+        <span role="img" aria-label="okay">
+          👌
+        </span>
+      </h2>
       <p>
         We’ll assign you new todos once per day based on how you’re feeling.
       </p>
       <div className="emojis">
         <div>
-          <span role="img" aria-label="happy face" className="icon" onClick={() => setEmoji("happy")}>
+          <span
+            role="img"
+            aria-label="happy face"
+            className="icon"
+            onClick={() => setEmoji("happy")}
+          >
             🙂
           </span>
           <span className={`emoji ${emoji === "happy"}`}>Happy</span>
         </div>
         <div>
-          <span role="img" aria-label="grinning face" className="icon" onClick={() => setEmoji("grinning_face")}>
+          <span
+            role="img"
+            aria-label="grinning face"
+            className="icon"
+            onClick={() => setEmoji("grinning_face")}
+          >
             😁
           </span>
           <span className={`emoji ${emoji === "grinning_face"}`}>Great</span>
         </div>
         <div>
-          <span role="img" aria-label="sticky tongue face" className="icon" onClick={() => setEmoji("sticky_out_tongue")}>
+          <span
+            role="img"
+            aria-label="sticky tongue face"
+            className="icon"
+            onClick={() => setEmoji("sticky_out_tongue")}
+          >
             😜
           </span>
           <span className={`emoji ${emoji === "sticky_out_tongue"}`}>
@@ -61,19 +88,34 @@ const Emotion = ({ setCurrentModal, user, updateProfile, history }) => {
           </span>
         </div>
         <div>
-          <span role="img" aria-label="indifferent" className="icon" onClick={() => setEmoji("Indifferent")}>
+          <span
+            role="img"
+            aria-label="indifferent"
+            className="icon"
+            onClick={() => setEmoji("Indifferent")}
+          >
             😕
           </span>
           <span className={`emoji ${emoji === "Indifferent"}`}>Mehh</span>
         </div>
         <div>
-          <span role="img" aria-label="sad face" className="icon" onClick={() => setEmoji("Sad")}>
+          <span
+            role="img"
+            aria-label="sad face"
+            className="icon"
+            onClick={() => setEmoji("Sad")}
+          >
             😔
           </span>
           <span className={`emoji ${emoji === "Sad"}`}>Sad</span>
         </div>
         <div>
-          <span role="img" aria-label="angry face" className="icon" onClick={() => setEmoji("Angry")}>
+          <span
+            role="img"
+            aria-label="angry face"
+            className="icon"
+            onClick={() => setEmoji("Angry")}
+          >
             😠
           </span>
           <span className={`emoji ${emoji === "Angry"}`}>Angry</span>
@@ -135,6 +177,7 @@ const StyledEmotion = styled.div`
 const mapDispatchToProps = dispatch => {
   return {
     onboardingStarted: () => dispatch(onboardingStarted()),
+    generateTodos: (user, emoji) => dispatch(generateTodos(user, emoji)),
     updateProfile: profile => dispatch(updateProfile(profile))
   };
 };
