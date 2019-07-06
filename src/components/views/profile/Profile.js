@@ -7,10 +7,10 @@ import { compose } from "redux";
 
 // components
 import IsAuthUser from "../../hoc/IsAuthUser";
-import {
-  grey_gradient,
-} from "../../~reusables/variables/colors";
+import { grey_gradient } from "../../~reusables/variables/colors";
 import ComponentLoader from "../../~reusables/molecules/ComponentLoader";
+import DesktopNav from "../../~reusables/layout/DesktopNav";
+import FooterNav from "../../~reusables/layout/FooterNav";
 
 const Profile = props => {
   const { user } = props;
@@ -18,15 +18,24 @@ const Profile = props => {
   let themeColor = null;
   if (user && user.length > 0) {
     themeColor = user[0].theme;
-    return <StyledProfile themeColor={themeColor}>Profile</StyledProfile>;
+    return (
+      <StyledProfile themeColor={themeColor}>
+        <DesktopNav />
+        <FooterNav />
+      </StyledProfile>
+    );
   } else {
-      return <ComponentLoader height="100vh" />;
+    return <ComponentLoader height="100vh" />;
   }
 };
 
 const StyledProfile = styled.div`
   height: 100vh;
   background: ${props => (props.themeColor ? props.themeColor : grey_gradient)};
+
+  @media only screen and (max-width: 499px) {
+    margin-bottom: 60px;
+  }
 `;
 
 const mapStateToProps = state => {

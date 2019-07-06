@@ -16,7 +16,7 @@ const Header = () => {
         <Link className="logo" to="/">
           <div className="logo-text">Slate</div>
           <div className="logo-icon">
-            <img src={logo} alt="Stackly Logo" />
+            <img src={logo} alt="Slate Logo" />
           </div>
         </Link>
         <ul>

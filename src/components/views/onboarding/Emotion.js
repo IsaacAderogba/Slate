@@ -35,7 +35,7 @@ const Emotion = ({ setCurrentModal, user, updateProfile, history }) => {
 
   return (
     <StyledEmotion>
-      <h2>`Lastly, ${user[0].name} How are you feeling? <span role="img" aria-label="okay">👌</span>`</h2>
+      <h2>Lastly, {user[0].name} How are you feeling? <span role="img" aria-label="okay">👌</span></h2>
       <p>
         We’ll assign you new todos once per day based on how you’re feeling.
       </p>
