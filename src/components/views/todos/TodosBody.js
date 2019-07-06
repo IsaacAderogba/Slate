@@ -2,7 +2,9 @@
 import React from "react";
 import styled from "styled-components";
 
-// components
+// components/methods
+import { connect } from "react-redux";
+import { clearTodos } from "../../../store/actions/todosActions";
 
 // styles
 import { text, white, alt_background } from "../../~reusables/variables/colors";
@@ -11,8 +13,7 @@ import { ButtonPrimary } from "../../~reusables/atoms/Buttons";
 import { heading_3 } from "../../~reusables/variables/font-sizes";
 import Todo from "./Todo";
 
-const TodosBody = ({ user }) => {
-  console.log(user);
+const TodosBody = ({ user, clearTodos }) => {
   return (
     <StyledTodos>
       <div className="open-todos">
@@ -70,7 +71,7 @@ const TodosBody = ({ user }) => {
       <div className="closed-todos">
         <div className="header">
           <h1>Closed Todos</h1>
-          <ButtonPrimary width="120px" color={user[0].theme}>
+          <ButtonPrimary onClick={() => clearTodos(user)} width="120px" color={user[0].theme}>
             Clear
           </ButtonPrimary>
         </div>
@@ -128,4 +129,13 @@ const StyledTodos = styled.main`
   }
 `;
 
-export default TodosBody;
+const mapDispatchToProps = dispatch => {
+    return {
+        clearTodos: (user) => dispatch(clearTodos(user))
+    };
+  };
+  
+  export default connect(
+    null,
+    mapDispatchToProps
+  )(TodosBody);

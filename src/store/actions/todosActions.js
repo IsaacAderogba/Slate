@@ -84,3 +84,16 @@ export const toggleTodo = (user, todo) => {
       });
   };
 };
+
+export const clearTodos = user => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+
+    firestore
+      .collection("users")
+      .doc(user[0].id)
+      .update({
+        closedTasks: []
+      });
+  };
+};
