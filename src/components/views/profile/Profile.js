@@ -9,13 +9,11 @@ import { compose } from "redux";
 import IsAuthUser from "../../hoc/IsAuthUser";
 import {
   grey_gradient,
-  orange_gradient
 } from "../../~reusables/variables/colors";
 import ComponentLoader from "../../~reusables/molecules/ComponentLoader";
 
 const Profile = props => {
   const { user } = props;
-  console.log(user);
 
   let themeColor = null;
   if (user && user.length > 0) {
