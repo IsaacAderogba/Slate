@@ -10,7 +10,8 @@ export const updateProfile = profile => {
       .doc(profile.id)
       .update({
         name: profile.name,
-        theme: profile.theme
+        theme: profile.theme,
+        emoji: profile.emoji
       })
       .then(() => {
         dispatch({ type: UPDATE_PROFILE });

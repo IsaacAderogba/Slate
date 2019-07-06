@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { primary, grey_gradient, alt_background } from "../variables/colors";
+import { alt_background } from "../variables/colors";
 
 const ComponentLoader = ({ themeColor, height }) => (
   <StyledLoader themeColor={themeColor} height={height}>

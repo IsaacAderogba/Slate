@@ -15,9 +15,9 @@ import Emotion from "./Emotion";
 import { grey_gradient } from "../../~reusables/variables/colors";
 
 const Onboarding = props => {
-  const [start, setStart] = useState(false);
+  const [start, setStart] = useState(true);
   const [color, setColor] = useState(false);
-  const [emotion, setEmotion] = useState(true);
+  const [emotion, setEmotion] = useState(false);
   const { user } = props;
 
   let themeColor = null;
@@ -39,7 +39,7 @@ const Onboarding = props => {
             setCurrentModal={setColor}
           />
         )}
-        {emotion && <Emotion user={user} />}
+        {emotion && <Emotion user={user} setCurrentModal={setEmotion} />}
       </StyledOnboarding>
     );
   } else {

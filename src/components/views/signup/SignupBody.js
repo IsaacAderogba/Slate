@@ -1,7 +1,9 @@
 // modules
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { compose } from "redux";
+import { withRouter } from "react-router-dom";
 
 // components
 import { signUp } from "../../../store/actions/authActions";
@@ -25,9 +27,15 @@ import { tablet_max_width } from "../../~reusables/variables/media-queries";
 import ComponentLoader from "../../~reusables/molecules/ComponentLoader";
 
 const SignupBody = props => {
-  const { signUp, signupError, signupLoader, signupSuccess } = props;
+  const { signUp, signupError, signupLoader, signupSuccess, history } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (signupSuccess) {
+      history.push("/onboarding");
+    }
+  }, [history, signupSuccess]);
 
   const onEmailChange = e => {
     setEmail(e.target.value);
@@ -66,9 +74,7 @@ const SignupBody = props => {
               />
               <ButtonSecondary>Sign Up</ButtonSecondary>
             </form>
-            {signupLoader ? (
-              <ComponentLoader height="50px" />
-            ) : null}
+            {signupLoader ? <ComponentLoader height="50px" /> : null}
             {signupError ? <p className="error">{signupError}</p> : null}
           </div>
           <div className="hero-image">
@@ -189,7 +195,10 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  withRouter,
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(SignupBody);

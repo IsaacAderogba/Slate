@@ -1,5 +1,5 @@
 // modules
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { onboardingStarted } from "../../../store/actions/authActions";
@@ -23,13 +23,13 @@ import {
 } from "../../~reusables/variables/spacing";
 
 const Color = ({ setNextModal, setCurrentModal, user, updateProfile }) => {
-
   const onSetTheme = themeSelected => {
     updateProfile({
-        name: user[0].name,
-        theme: themeSelected,
-        id: user[0].id
-      });
+      name: user[0].name,
+      theme: themeSelected,
+      id: user[0].id,
+      emoji: user[0].emoji
+    });
   };
 
   const onFormSubmit = e => {
@@ -40,7 +40,12 @@ const Color = ({ setNextModal, setCurrentModal, user, updateProfile }) => {
 
   return (
     <StyledColor>
-      <h2>Choose your theme 🎨</h2>
+      <h2>
+        Choose your theme{" "}
+        <span role="img" aria-label="okay">
+          🎨
+        </span>
+      </h2>
       <p>Don't worry, this can be changed at any time.</p>
       <div className="colors">
         <div

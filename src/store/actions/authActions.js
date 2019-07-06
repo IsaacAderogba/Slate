@@ -61,8 +61,10 @@ export const signUp = newUser => {
           .doc(res.user.uid)
           .set({
             email: newUser.email,
+            emoji: "happy",
             name: "",
-            theme: "linear-gradient(180deg, #FF7F7F -29.41%, rgba(255, 209, 127, 0.5) 131.37%)",
+            theme:
+              "linear-gradient(180deg, #FF7F7F -29.41%, rgba(255, 209, 127, 0.5) 131.37%)",
             openTasks: [],
             closedTasks: [],
             newDay: true
