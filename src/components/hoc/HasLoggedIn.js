@@ -7,7 +7,7 @@ const HasLoggedIn = WrappedComponent => {
   const HOCComponent = props => {
     const { auth } = props;
     if (auth.uid) {
-      return <Redirect to="/profile" />;
+      return <Redirect to="/todos" />;
     } else {
       return <WrappedComponent {...props} />;
     }

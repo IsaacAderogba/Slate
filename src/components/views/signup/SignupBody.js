@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
 
@@ -27,7 +28,14 @@ import { tablet_max_width } from "../../~reusables/variables/media-queries";
 import ComponentLoader from "../../~reusables/molecules/ComponentLoader";
 
 const SignupBody = props => {
-  const { signUp, signupError, signupLoader, signupSuccess, history } = props;
+  const {
+    signUp,
+    signupError,
+    signupLoader,
+    signupSuccess,
+    history,
+    auth
+  } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -35,7 +43,10 @@ const SignupBody = props => {
     if (signupSuccess) {
       history.push("/onboarding");
     }
-  }, [history, signupSuccess]);
+    if (!signupSuccess && !signupLoader && auth && auth.uid) {
+      history.push("/todos");
+    }
+  }, [auth, history, signupLoader, signupSuccess]);
 
   const onEmailChange = e => {
     setEmail(e.target.value);
@@ -55,10 +66,10 @@ const SignupBody = props => {
       <section className="hero-container">
         <div className="hero">
           <div className="hero-text">
-            <h1>Log in to your account</h1>
+            <h1>Your Personal Todo List</h1>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididun
+              Personalised todos to boost your mental health. Start each day
+              with a clean slate.
             </p>
             <form onSubmit={onFormSubmit}>
               <Input
@@ -108,7 +119,7 @@ const StyledBody = styled.main`
   }
 
   p {
-    font-size: ${button_text};
+    font-size: 20px;
     font-weight: 500;
   }
 
@@ -183,6 +194,8 @@ const StyledBody = styled.main`
 
 const mapStateToProps = state => {
   return {
+    user: state.firestore.ordered.user,
+    auth: state.firebase.auth,
     signupError: state.auth.signupError,
     signupSuccess: state.auth.signupSuccess,
     signupLoader: state.auth.signupLoader
@@ -200,5 +213,14 @@ export default compose(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )
+  ),
+  firestoreConnect(props => {
+    return [
+      {
+        collection: "users",
+        where: ["email", "==", `${props.auth.email}`],
+        storeAs: "user"
+      }
+    ];
+  })
 )(SignupBody);
