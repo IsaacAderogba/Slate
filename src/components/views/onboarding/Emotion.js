@@ -17,6 +17,7 @@ import {
   medium_space_1,
   small_space
 } from "../../~reusables/variables/spacing";
+import ComponentLoader from "../../~reusables/molecules/ComponentLoader";
 
 const Emotion = ({
   setCurrentModal,
@@ -25,7 +26,8 @@ const Emotion = ({
   history,
   generateTodos
 }) => {
-  const [emoji, setEmoji] = useState("happy");
+  const [emoji, setEmoji] = useState(user[0].emoji);
+  const [loader, setLoader] = useState(false);
 
   const onFormSubmit = e => {
     e.preventDefault();
@@ -35,21 +37,25 @@ const Emotion = ({
       id: user[0].id,
       emoji: emoji
     });
+    setLoader(true);
     generateTodos(user, emoji);
-    setCurrentModal(false);
-    history.push("/todos");
+    setTimeout(() => {
+      setLoader(false);
+      setCurrentModal(false);
+      history.push("/todos");
+    }, 1000)
   };
 
   return (
     <StyledEmotion>
       <h2>
-        Lastly, {user[0].name} How are you feeling?{" "}
+        {user[0].name}, how are you feeling?{" "}
         <span role="img" aria-label="okay">
           👌
         </span>
       </h2>
       <p>
-        We’ll assign you new todos once per day based on how you’re feeling.
+        We’ll assign you new todos based on how you’re feeling.
       </p>
       <div className="emojis">
         <div>
@@ -122,13 +128,15 @@ const Emotion = ({
         </div>
       </div>
       <form onSubmit={onFormSubmit}>
-        <ButtonSecondary>Finish</ButtonSecondary>
+        <ButtonSecondary>Get Todos</ButtonSecondary>
       </form>
+        {loader ? <ComponentLoader height="40px" /> : null}
     </StyledEmotion>
   );
 };
 
 const StyledEmotion = styled.div`
+padding: ${small_space};
   .emojis {
     max-width: 350px;
     margin: 0 auto;
@@ -150,7 +158,7 @@ const StyledEmotion = styled.div`
         font-size: 36px;
       }
       .emoji {
-        font-size: 20px;
+        font-size: 16px;
         font-weight: 500;
         color: ${white};
       }
@@ -171,6 +179,7 @@ const StyledEmotion = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: ${medium_space_1};
   }
 `;
 

@@ -42,10 +42,6 @@ const StyledProfile = styled.div`
   .body {
     padding: ${small_space};
   }
-
-  @media only screen and (max-width: 500px) {
-    margin-bottom: 60px;
-  }
 `;
 
 const mapStateToProps = state => {

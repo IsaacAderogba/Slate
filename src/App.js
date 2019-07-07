@@ -29,6 +29,11 @@ function App() {
       />
       <Route
         exact
+        path="/todos/:generate"
+        render={routeProps => <Onboarding {...routeProps} />}
+      />
+      <Route
+        exact
         path="/todos"
         render={routeProps => <Todos {...routeProps} />}
       />

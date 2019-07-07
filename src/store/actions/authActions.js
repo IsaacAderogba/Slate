@@ -67,7 +67,7 @@ export const signUp = newUser => {
               "linear-gradient(180deg, #FF7F7F -29.41%, rgba(255, 209, 127, 0.5) 131.37%)",
             openTasks: [],
             closedTasks: [],
-            newDay: true
+            todosReady: true
           });
       })
       .then(() => {

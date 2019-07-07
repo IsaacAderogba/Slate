@@ -1,6 +1,7 @@
 // modules
 import React from "react";
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
 
 // components/methods
 import { connect } from "react-redux";
@@ -14,11 +15,13 @@ import { heading_3 } from "../../~reusables/variables/font-sizes";
 import Todo from "./Todo";
 
 const TodosBody = ({ user, clearTodos }) => {
+  console.log(user);
   return (
     <StyledTodos>
       <div className="open-todos">
         <div className="header">
           <h1>Open Todos</h1>
+          <Link to="/todos/generate">
           {user[0].emoji === "happy" && (
             <div className="emoji">
               <span role="img" aria-label="happy">
@@ -61,6 +64,7 @@ const TodosBody = ({ user, clearTodos }) => {
               </span>
             </div>
           )}
+          </Link>
         </div>
         <div className="todos">
             {user[0].openTasks.map(todo => {
@@ -88,6 +92,10 @@ const TodosBody = ({ user, clearTodos }) => {
 const StyledTodos = styled.main`
   max-width: 800px;
   margin: 0 auto;
+
+  a {
+    text-decoration: none;
+  }
 
   .emoji {
     width: 36px;
@@ -126,6 +134,8 @@ const StyledTodos = styled.main`
     h1 {
       font-size: ${heading_3};
     }
+    margin-bottom: 60px;
+  
   }
 `;
 

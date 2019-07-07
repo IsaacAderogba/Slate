@@ -37,7 +37,13 @@ const Start = ({
 
   return (
     <StyledStart>
-      <h2>Hey there <span role="img" aria-label="wave">👋</span>, let's get you set up </h2>
+      <h2>
+        Hey there{" "}
+        <span role="img" aria-label="wave">
+          👋
+        </span>
+        , let's get you set up{" "}
+      </h2>
       <p>Please enter your first name to begin onboarding.</p>
       <form onSubmit={onFormSubmit}>
         <Input

@@ -1,9 +1,10 @@
 // modules
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
+import { withRouter } from "react-router-dom";
 
 // components
 import IsAuthUser from "../../hoc/IsAuthUser";
@@ -11,22 +12,31 @@ import { grey_gradient } from "../../~reusables/variables/colors";
 import ComponentLoader from "../../~reusables/molecules/ComponentLoader";
 import DesktopNav from "../../~reusables/layout/DesktopNav";
 import FooterNav from "../../~reusables/layout/FooterNav";
+
+// styles
 import { small_space } from "../../~reusables/variables/spacing";
 import TodosBody from "./TodosBody";
 
 const Todos = props => {
-  const { user } = props;
+  const { user, history } = props;
+
+  useEffect(() => {
+    if (user && user.length > 0 && user[0].todosReady) {
+      history.push("/todos/generate");
+    }
+  }, [history, user]);
 
   let themeColor = null;
   if (user && user.length > 0) {
     themeColor = user[0].theme;
+
     return (
       <StyledTodos themeColor={themeColor}>
         <DesktopNav />
         <div className="body">
           <TodosBody user={user} />
         </div>
-          <FooterNav />
+        <FooterNav />
       </StyledTodos>
     );
   } else {
@@ -41,10 +51,6 @@ const StyledTodos = styled.div`
   .body {
     padding: ${small_space};
   }
-
-  @media only screen and (max-width: 500px) {
-    margin-bottom: 60px;
-  }
 `;
 
 const mapStateToProps = state => {
@@ -55,6 +61,7 @@ const mapStateToProps = state => {
 };
 
 export default compose(
+  withRouter,
   connect(mapStateToProps),
   firestoreConnect(props => {
     return [

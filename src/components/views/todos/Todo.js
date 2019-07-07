@@ -40,6 +40,8 @@ const StyledTodo = styled.div`
   .box {
     height: 36px;
     width: 36px;
+    min-height: 36px;
+    min-width: 36px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,6 +54,9 @@ const StyledTodo = styled.div`
     div {
       height: 30px;
       width: 30px;
+      min-height: 30px;
+      min-width: 30px;
+
       border-radius: 6px;
       background: ${white};
       color: ${white};
@@ -83,12 +88,18 @@ const StyledTodo = styled.div`
     .box {
       height: 24px;
       width: 24px;
+
+      min-height: 24px;
+        min-width: 24px;
       border-radius: 4px;
       margin: 0 ${small_space};
 
       div {
         height: 20px;
         width: 20px;
+
+        min-height: 20px;
+        min-width: 20px;
         border-radius: 4px;
       }
 

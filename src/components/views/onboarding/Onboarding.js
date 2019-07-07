@@ -13,11 +13,16 @@ import Emotion from "./Emotion";
 
 // styles
 import { grey_gradient } from "../../~reusables/variables/colors";
+import { small_space } from "../../~reusables/variables/spacing";
 
 const Onboarding = props => {
-  const [start, setStart] = useState(true);
+  const [start, setStart] = useState(
+    props.match.params.generate ? false : true
+  );
   const [color, setColor] = useState(false);
-  const [emotion, setEmotion] = useState(false);
+  const [emotion, setEmotion] = useState(
+    props.match.params.generate ? true : false
+  );
   const { user } = props;
 
   let themeColor = null;
@@ -48,6 +53,7 @@ const Onboarding = props => {
 };
 
 const StyledOnboarding = styled.div`
+  padding: ${small_space};
   height: 100vh;
   display: flex;
   justify-content: center;

@@ -77,6 +77,7 @@ const Color = ({ setNextModal, setCurrentModal, user, updateProfile }) => {
 };
 
 const StyledColor = styled.div`
+  padding: ${small_space};
   .colors {
     max-width: 350px;
     margin-bottom: ${medium_space_1};

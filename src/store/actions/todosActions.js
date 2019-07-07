@@ -35,7 +35,8 @@ export const generateTodos = (user, emoji) => {
           .collection("users")
           .doc(user[0].id)
           .update({
-            openTasks: [...user[0].openTasks, ...arrayOfObjects]
+            openTasks: [...user[0].openTasks, ...arrayOfObjects],
+            todosReady: false,
           });
 
         dispatch({ type: GENERATE_TODOS });
@@ -51,8 +52,7 @@ export const toggleTodo = (user, todo) => {
     const firestore = getFirestore();
     let openTodos = user[0].openTasks.map(t => {
       if (t.id === todo.id) {
-        t.completed = !t.completed;
-        return t;
+        return {...t, completed: !t.completed};
       }
       return t;
     });

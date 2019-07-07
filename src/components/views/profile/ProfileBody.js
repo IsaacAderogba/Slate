@@ -142,6 +142,10 @@ const StyledBody = styled.main`
     color: ${white};
     margin: ${small_space} 0;
   }
+
+  @media only screen and (max-width: 500px) {
+    margin-bottom: 60px;
+  }
 `;
 
 const mapDispatchToProps = dispatch => {
