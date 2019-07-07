@@ -15,7 +15,6 @@ import { heading_3 } from "../../~reusables/variables/font-sizes";
 import Todo from "./Todo";
 
 const TodosBody = ({ user, clearTodos }) => {
-  console.log(user);
   return (
     <StyledTodos>
       <div className="open-todos">

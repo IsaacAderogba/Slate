@@ -18,7 +18,6 @@ import {
 import heroImage from "../../~reusables/assets/hero-image.png";
 import {
   heading_1,
-  button_text,
   heading_2,
   body_1
 } from "../../~reusables/variables/font-sizes";
