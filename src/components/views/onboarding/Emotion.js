@@ -43,7 +43,7 @@ const Emotion = ({
       setLoader(false);
       setCurrentModal(false);
       history.push("/todos");
-    }, 1000)
+    }, 1000);
   };
 
   return (
@@ -54,9 +54,7 @@ const Emotion = ({
           👌
         </span>
       </h2>
-      <p>
-        We’ll assign you new todos based on how you’re feeling.
-      </p>
+      <p>We’ll assign you new todos based on how you’re feeling.</p>
       <div className="emojis">
         <div>
           <span
@@ -130,13 +128,13 @@ const Emotion = ({
       <form onSubmit={onFormSubmit}>
         <ButtonSecondary>Get Todos</ButtonSecondary>
       </form>
-        {loader ? <ComponentLoader height="40px" /> : null}
+      {loader ? <ComponentLoader height="40px" /> : null}
     </StyledEmotion>
   );
 };
 
 const StyledEmotion = styled.div`
-padding: ${small_space};
+  padding: ${small_space};
   .emojis {
     max-width: 350px;
     margin: 0 auto;

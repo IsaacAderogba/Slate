@@ -63,6 +63,7 @@ export const signUp = newUser => {
             email: newUser.email,
             emoji: "happy",
             name: "",
+            date: new Date().getDay(),
             theme:
               "linear-gradient(180deg, #FF7F7F -29.41%, rgba(255, 209, 127, 0.5) 131.37%)",
             openTasks: [],

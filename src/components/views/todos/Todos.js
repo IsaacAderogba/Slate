@@ -12,19 +12,23 @@ import { grey_gradient } from "../../~reusables/variables/colors";
 import ComponentLoader from "../../~reusables/molecules/ComponentLoader";
 import DesktopNav from "../../~reusables/layout/DesktopNav";
 import FooterNav from "../../~reusables/layout/FooterNav";
+import { setTodoReady } from "../../../store/actions/todosActions";
 
 // styles
 import { small_space } from "../../~reusables/variables/spacing";
 import TodosBody from "./TodosBody";
 
 const Todos = props => {
-  const { user, history } = props;
+  const { user, history, setTodoReady } = props;
 
   useEffect(() => {
-    if (user && user.length > 0 && user[0].todosReady) {
-      history.push("/todos/generate");
+    if (user && user.length > 0) {
+      setTodoReady(user);
+      if (user[0].todosReady) {
+        history.push("/todos/generate");
+      }
     }
-  }, [history, user]);
+  }, [history, setTodoReady, user]);
 
   let themeColor = null;
   if (user && user.length > 0) {
@@ -60,9 +64,18 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = dispatch => {
+  return {
+    setTodoReady: user => dispatch(setTodoReady(user))
+  };
+};
+
 export default compose(
   withRouter,
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   firestoreConnect(props => {
     return [
       {

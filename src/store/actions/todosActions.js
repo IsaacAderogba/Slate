@@ -1,6 +1,7 @@
 import uuid from "uuid";
 export const GENERATE_TODOS = "GENERATE_TODOS";
 export const TOGGLE_TODO = "TOGGLE_TODO";
+export const SET_TODO = "SET_TODO";
 
 export const generateTodos = (user, emoji) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -36,7 +37,7 @@ export const generateTodos = (user, emoji) => {
           .doc(user[0].id)
           .update({
             openTasks: [...user[0].openTasks, ...arrayOfObjects],
-            todosReady: false,
+            todosReady: false
           });
 
         dispatch({ type: GENERATE_TODOS });
@@ -47,12 +48,29 @@ export const generateTodos = (user, emoji) => {
   };
 };
 
+export const setTodoReady = user => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    let currentDate = new Date().getDay();
+    if (currentDate !== user[0].date) {
+      const firestore = getFirestore();
+
+      firestore
+        .collection("users")
+        .doc(user[0].id)
+        .update({
+          date: currentDate,
+          todosReady: true
+        });
+    }
+  };
+};
+
 export const toggleTodo = (user, todo) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     let openTodos = user[0].openTasks.map(t => {
       if (t.id === todo.id) {
-        return {...t, completed: !t.completed};
+        return { ...t, completed: !t.completed };
       }
       return t;
     });
